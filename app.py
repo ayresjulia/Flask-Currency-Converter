@@ -22,10 +22,10 @@ def form_page():
 def result_page():
     '''Converts currency and shows result, if currecy abbreviation is valid'''
 
-    conv_from = request.args['conv_from'].upper()  # getting 'USD'
-    conv_to = request.args['conv_to'].upper()  # getting 'INR'
-    amount = int(request.args['amount'])  # getting integer instead of string
-    abbr = code.get_symbol(conv_to)  # get currency abbreviation symbol
+    conv_from = request.args['conv_from'].upper()  
+    conv_to = request.args['conv_to'].upper()  
+    amount = int(request.args['amount'])  
+    abbr = code.get_symbol(conv_to)  
     if conv_from not in supported_c:
         flash('Currency not supported, try again', 'alert alert-danger')
         return redirect('/')
@@ -34,6 +34,6 @@ def result_page():
         return redirect('/')
     else:
         converted_amt = c.convert(conv_from, conv_to, amount)
-        abbr = code.get_symbol(conv_to)  # get currency abbreviation symbol
+        abbr = code.get_symbol(conv_to)  
         flash('Success!', 'alert alert-success')
     return render_template('result.html', conv_from=conv_from, conv_to=conv_to, amount=amount, converted_amt=converted_amt, abbr=abbr)
